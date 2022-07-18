@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/fa/css/all.css">
+    <style>
+        .box {
+            background-color: white;
+            height: 400px;
+            width: 340px;
+            border: 4px solid black;
+            border-radius: 30px;
+            margin: 100px auto;
+           
+            
+        }
+        .fa-user {
+            font-size: 60px;
+            color: black;
+            margin: 20px 120px;
+              
+        }
+        .input_all {
+            margin: 10px 60px;
+            
+            
+        }
+        input {
+            color:black;
+            background-color: white;
+            padding: 5px;
+            border-color: blue;
+        }
+        .checkbox , .label{
+            margin: 20px 10px;
+            
+
+        }
+        ::placeholder {
+            font-size: 15px;
+        }
+        .submit {
+            margin: 5px 60px;
+        }
+        input:hover {
+            border: 2px solid blue;
+            box-shadow: 0 0 5px blue;
+        }
+        i {
+            margin: 0px 8px;
+            font-size:20px ;
+        }
+        #nameError {
+            color: red;
+            font: bold;
+            font-family: sans-serif;
+        }
+        #gmailError {
+            color: red;
+            font: bold;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <main>
+    <form action="">
+        <div class="box">
+            <div><i class="fa fa-user"></i></div>
+            <div class="input_all" id="nameError"></div>
+            <div class="input_all"><input type="text" placeholder="Enter user name" id="userName"></div>
+            <div class="input_all" id="gmailError"></div>
+            <div class="input_all"><input type="email" placeholder="Enter the G-mail" id="gmail"></div>
+            <div class="input_all"><input type="password" id="password" placeholder="Enter password"><i class="fa fa-eye icon1" onclick="clickchangetype('password','icon1')"></i></div>
+            <div class="input_all" id="passError"></div>
+            <div class="input_all"><input type="password" id="conpassword" placeholder="Confirm Password"><i class="fa fa-eye icon2" onclick="clickchangetype('conpassword','icon2')"></i><br><input type="checkbox" class="checkbox"><label class="label" for="">I'am not a robot</label><button class="submit">submit</button></div></div>
+            <div class="submit"></div>
+        </div>
+    </form>
+    </main>
+    <script>
+        function clickchangetype(inputid,classname){
+            if (document.getElementById(inputid).type==="password"){
+                document.getElementById(inputid).setAttribute('type','text');
+                document.querySelector(`.${classname}`).classList.replace('fa-eye','fa-eye-slash')
+            }else{
+                document.getElementById(inputid).setAttribute('type','password');
+                document.querySelector(`.${classname}`).classList.replace('fa-eye-slash','fa-eye')
+            }
+        }
+        let nameTag = document.getElementById('userName')
+        nameTag.addEventListener('change',()=>{
+            if (nameTag.value.length<5){
+                document.getElementById('nameError').textContent = "*name should be atleast 5 chars";
+                nameTag.style.borderColor = 'red';
+            }else{
+                document.getElementById('nameError').textContent = '';
+                nameTag.style.borderColor = 'blue';
+                if (nameTag.value.match(/^[A-Z]/)){
+                document.getElementById('nameError').textContent='';
+                nameTag.style.borderColor = 'blue';
+                
+                }else {
+                document.getElementById('nameError').textContent = '*First Char sholud be uppercase';
+                nameTag.style.borderColor = 'red';
+                
+                }
+            }  
+        })
+        let gmailTag = document.getElementById('gmail');
+        gmailTag.addEventListener('change',()=>{
+            if (gmailTag.value.match(/[gmail.com]$/)){
+                document.getElementById('gmailError').textContent = '';
+                gmailTag.style.borderColor = 'blue'
+                if (gmailTag.value.match(/[@]/)){
+                    document.getElementById('gmailError').textContent = '';
+                    gmailTag.style.borderColor = 'blue'
+                }else {
+                    document.getElementById('gmailError').textContent = '*Please add the @ symbol';
+                    gmailTag.style.borderColor = 'red'
+                }
+            }else {
+                document.getElementById('gmailError').textContent = '*Please enter the gmail.com at the end';
+                gmailTag.style.borderColor = 'red'
+               
+            }
+        })
+
+        let confirmpassError = document.getElementById('conpassword');
+        let passwordError = documnet.getElementById('password')
+        confirmpassError.addEventListener('change',()=>{
+            if(passwordError.value.match(confirmpassError.value)){
+                document.getElementById('passError').textContent = '';
+                confirmpassError.style.borderColor = 'blue'
+            }else {
+                document.getElementById('passError').textContent = '*please type matching password';
+                confirmpassError.style.borderColor = 'red'
+            }
+        })
+
+    </script>
+</body>
+</html>
